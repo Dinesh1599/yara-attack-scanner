@@ -37,7 +37,7 @@ flowchart TD
 ```
 # Clone the repository
 
-git clone https://github.com/yourusername/yara-attack-scanner.git
+git clone https://github.com/Dinesh1599/yara-attack-scanner.git
 cd yara-attack-scanner
 
 # Install dependencies
