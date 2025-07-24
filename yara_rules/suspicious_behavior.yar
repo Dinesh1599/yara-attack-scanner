@@ -1,7 +1,7 @@
 rule Hidden_Executable {
     meta:
         description = "Detects executable files masquerading as documents"
-        author = "Deloitte Threat Intelligence"
+        author = "Dinesh"
         reference = "https://attack.mitre.org/techniques/T1036/"
         severity = "high"
         mitre_attack_id = "T1036"
@@ -19,7 +19,7 @@ rule Hidden_Executable {
 rule Process_Injection_Attempt {
     meta:
         description = "Detects common process injection patterns"
-        author = "Deloitte Threat Intelligence"
+        author = "Dinesh"
         reference = "https://attack.mitre.org/techniques/T1055/"
         severity = "high"
         mitre_attack_id = "T1055"
