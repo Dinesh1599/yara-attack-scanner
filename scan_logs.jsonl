@@ -1,0 +1,29 @@
+{"target": "C:\\Users\\dines\\Downloads\\aniwatch.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:01.418390"}
+{"target": "C:\\Users\\dines\\Downloads\\apache-tomcat-10.1.30.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:01.903375"}
+{"target": "C:\\Users\\dines\\Downloads\\Battle.net-Setup.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:01.935254"}
+{"target": "C:\\Users\\dines\\Downloads\\BraveBrowserSetup-BRV011.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:01.988521"}
+{"target": "C:\\Users\\dines\\Downloads\\ChromeSetup.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:02.037799"}
+{"target": "C:\\Users\\dines\\Downloads\\DiscordSetup.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:02.390642"}
+{"target": "C:\\Users\\dines\\Downloads\\Docker Desktop Installer (1).exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:03.919415"}
+{"target": "C:\\Users\\dines\\Downloads\\Docker Desktop Installer.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:05.769210"}
+{"target": "C:\\Users\\dines\\Downloads\\Focusrite-Control-2.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:06.010085"}
+{"target": "C:\\Users\\dines\\Downloads\\focusritedriver_4.124.3_5.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:06.082781"}
+{"target": "C:\\Users\\dines\\Downloads\\Git-2.49.0-64-bit.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:06.357694"}
+{"target": "C:\\Users\\dines\\Downloads\\JavaSetup8u421.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:11.121482"}
+{"target": "C:\\Users\\dines\\Downloads\\jdk-23_windows-x64_bin.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:11.628169"}
+{"target": "C:\\Users\\dines\\Downloads\\jetbrains-toolbox-2.4.2.32922.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:11.812931"}
+{"target": "C:\\Users\\dines\\Downloads\\jre-8u421-windows-x64.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:11.984145"}
+{"target": "C:\\Users\\dines\\Downloads\\mongodb-compass-1.44.4-win32-x64.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:12.420403"}
+{"target": "C:\\Users\\dines\\Downloads\\Obsidian-1.8.10.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:15.388776"}
+{"target": "C:\\Users\\dines\\Downloads\\OfficeSetup.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:15.410850"}
+{"target": "C:\\Users\\dines\\Downloads\\RemoteMouse.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:15.442337"}
+{"target": "C:\\Users\\dines\\Downloads\\SlackSetup.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:15.811499"}
+{"target": "C:\\Users\\dines\\Downloads\\SteamSetup.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:15.821241"}
+{"target": "C:\\Users\\dines\\Downloads\\SurfsharkSetup.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:16.043325"}
+{"target": "C:\\Users\\dines\\Downloads\\TableauDesktop-64bit-2024-2-3.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:17.832273"}
+{"target": "C:\\Users\\dines\\Downloads\\VirtualBox-7.1.0-164728-Win.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:18.626000"}
+{"target": "C:\\Users\\dines\\Downloads\\VirtualBox-7.1.8-168469-Win.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:18.928722"}
+{"target": "C:\\Users\\dines\\Downloads\\vlc-3.0.21-win64.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:19.363829"}
+{"target": "C:\\Users\\dines\\Downloads\\VSCodeUserSetup-x64-1.100.2.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:19.735726"}
+{"target": "C:\\Users\\dines\\Downloads\\vs_BuildTools.exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:19.747969"}
+{"target": "C:\\Users\\dines\\Downloads\\ZAP_2_16_1_windows (1).exe", "rule": "Hidden_Executable", "severity": "high", "timestamp": "2025-07-24T14:51:20.343339"}

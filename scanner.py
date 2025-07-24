@@ -1,97 +1,104 @@
-import yara
+#!/usr/bin/env python3
 import os
+import yara
 import json
 import time
+import argparse
 from datetime import datetime
+from pathlib import Path
 from config import YARA_RULES_DIR, REALTIME_SCAN_TARGETS, LOG_FILE
 
 class YaraScanner:
     def __init__(self):
         self.rules = self._compile_rules()
-        
+        self.skip_patterns = [
+            '\\Temp\\*.tmp',
+            '\\Windows\\Temp\\*',
+            '\\$Recycle.Bin\\*'
+        ]
+    
     def _compile_rules(self):
-        """Compile all YARA rules from the rules directory"""
+        """Compile all YARA rules"""
         try:
-            rule_files = [os.path.join(YARA_RULES_DIR, f) 
-                         for f in os.listdir(YARA_RULES_DIR) 
-                         if f.endswith('.yar')]
-            if not rule_files:
-                raise ValueError("No YARA rules found in rules directory")
-            return yara.compile(filepaths={
-                os.path.basename(f).split('.')[0]: f for f in rule_files
-            })
+            rule_files = [f for f in Path(YARA_RULES_DIR).glob('*.yar')]
+            return yara.compile(filepaths={f.stem: str(f) for f in rule_files})
         except yara.Error as e:
-            print(f"[!] YARA compilation error: {str(e)}")
+            print(f"[!] YARA Error: {str(e)}")
             raise
 
-    def scan_target(self, target):
-        """Scan a single target (file or directory)"""
-        if not os.path.exists(target):
-            print(f"[!] Target not found: {target}")
+    def should_skip(self, path):
+        """Windows-specific file skipping"""
+        path = str(path).lower()
+        return any(pattern.lower() in path for pattern in self.skip_patterns)
+
+    def scan_file(self, file_path):
+        """Scan a single file"""
+        try:
+            if self.should_skip(file_path):
+                return []
+            return self.rules.match(str(file_path))
+        except Exception as e:
+            print(f"[!] Scan error: {file_path} - {str(e)}")
             return []
 
+    def scan_target(self, target):
+        """Scan file or directory"""
+        target_path = Path(target)
+        if not target_path.exists():
+            return []
+            
+        if target_path.is_file():
+            return self._process_matches(self.scan_file(target_path), str(target_path))
+            
         matches = []
-        try:
-            if os.path.isfile(target):
-                file_matches = self.rules.match(target)
-                if file_matches:
-                    matches.extend(self._process_matches(file_matches, target))
-            elif os.path.isdir(target):
-                for root, _, files in os.walk(target):
-                    for file in files:
-                        file_path = os.path.join(root, file)
-                        file_matches = self.rules.match(file_path)
-                        if file_matches:
-                            matches.extend(self._process_matches(file_matches, file_path))
-        except Exception as e:
-            print(f"[!] Error scanning {target}: {str(e)}")
+        for item in target_path.glob('*'):
+            if item.is_file():
+                matches.extend(self._process_matches(self.scan_file(item), str(item)))
         return matches
-    
+
     def _process_matches(self, matches, target):
-        """Process YARA matches and add metadata"""
+        """Format detection results"""
         return [{
             'target': target,
             'rule': match.rule,
-            'description': match.meta.get('description', ''),
             'severity': match.meta.get('severity', 'medium'),
-            'timestamp': datetime.now().isoformat(),
-            'mitre_attack_id': match.meta.get('mitre_attack_id', 'N/A')
+            'timestamp': datetime.now().isoformat()
         } for match in matches]
 
     def log_results(self, matches):
-        """Log scan results to file"""
-        if not matches:
-            return
-            
+        """Save detections to log"""
         with open(LOG_FILE, 'a') as f:
             for match in matches:
                 f.write(json.dumps(match) + '\n')
-        print(f"[+] Logged {len(matches)} detection(s) to {LOG_FILE}")
 
-    def real_time_scan(self):
-        """Continuously monitor default directories"""
-        print(f"[+] Starting real-time monitoring of:")
-        for target in REALTIME_SCAN_TARGETS:
-            print(f"    - {target}")
-        
+    def real_time_scan(self):  # Correct method name (with underscore)
+        """Continuous monitoring"""
+        print("[+] Starting real-time monitoring...")
         try:
             while True:
                 for target in REALTIME_SCAN_TARGETS:
-                    matches = self.scan_target(target)
-                    if matches:
-                        self.log_results(matches)
-                        for match in matches:
-                            print(f"[!] Threat detected: {match['rule']} in {match['target']} (Severity: {match['severity']})")
-                time.sleep(10)  # Scan interval (10 seconds)
+                    self.log_results(self.scan_target(target))
+                time.sleep(10)
         except KeyboardInterrupt:
-            print("\n[!] Real-time monitoring stopped by user")
-        except Exception as e:
-            print(f"[!] Fatal error in real-time scan: {str(e)}")
+            print("\n[!] Monitoring stopped")
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--mode', choices=['realtime', 'on-demand'], default='realtime')
+    parser.add_argument('--target', help="File/directory to scan")
+    args = parser.parse_args()
+
+    scanner = YaraScanner()
+    
+    if args.mode == 'on-demand':
+        if not args.target:
+            print("[!] Specify target with --target")
+            return
+            
+        matches = scanner.scan_target(args.target)
+        print(f"Scanned {args.target}. Found {len(matches)} threats.")
+    else:
+        scanner.real_time_scan()  # Correct method call
 
 if __name__ == "__main__":
-    try:
-        print("[+] Initializing YARA scanner...")
-        scanner = YaraScanner()
-        scanner.real_time_scan()
-    except Exception as e:
-        print(f"[!] Startup failed: {str(e)}")
+    main()
